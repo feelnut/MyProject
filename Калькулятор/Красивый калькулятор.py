@@ -10,7 +10,7 @@ class MyWidget(QMainWindow):
         self.setWindowTitle('Ничо такой считовод')
 
         self.LCD.setDigitCount(15)
-        self.str = ''
+        self.str, self.znak, self.strall, self.numbers = '', [], '', []
 
         self.open.clicked.connect(self.openf)
         self.close.clicked.connect(self.closef)
@@ -36,61 +36,128 @@ class MyWidget(QMainWindow):
         self.delete1.clicked.connect(self.deletef)
         self.fact.clicked.connect(self.factf)
         self.drob.clicked.connect(self.drobf)
+        self.procent.clicked.connect(self.procentf)
+
+    def procentf(self):
+        self.znak = '%'
+        self.strall += '%'
+        self.primer.setText(self.strall)
+        try:
+            self.num1 = float(self.str) / 100
+            self.LCD.display(self.num1)
+        except ValueError:
+            self.LCD.display('Error')
 
     def df(self):
-        self.str += '/'
-        self.LCD.display(self.str)
+        try:
+            self.numbers.append(float(self.str))
+        except ValueError:
+            self.LCD.display('Error')
+        self.str = ''
+        self.znak = '/'
+        if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
+        else:
+            self.strall += '/'
+        self.primer.setText(self.strall)
 
     def raf(self):
-        self.str += '-'
-        self.LCD.display(self.str)
+        try:
+            self.numbers.append(float(self.str))
+        except ValueError:
+            self.LCD.display('Error')
+        self.str = ''
+        self.znak = '-'
+        if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
+        else:
+            self.strall += '-'
+        self.primer.setText(self.strall)
 
     def sf(self):
-        self.str += '+'
-        self.LCD.display(self.str)
+        try:
+            self.numbers.append(float(self.str))
+        except ValueError:
+            self.LCD.display('Error')
+        self.str = ''
+        self.znak = '+'
+        if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
+        else:
+            self.strall += '+'
+        self.primer.setText(self.strall)
 
     def pf(self):
-        self.str += '*'
-        self.LCD.display(self.str)
+        try:
+            self.numbers.append(float(self.str))
+        except ValueError:
+            self.LCD.display('Error')
+        self.str = ''
+        self.znak = '*'
+        if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
+        else:
+            self.strall += '*'
+        self.primer.setText(self.strall)
 
     def ninef(self):
         self.str += '9'
+        self.strall += '9'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def eightf(self):
         self.str += '8'
+        self.strall += '8'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def sevenf(self):
         self.str += '7'
+        self.strall += '7'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def sixf(self):
         self.str += '6'
+        self.strall += '6'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def fivef(self):
         self.str += '5'
+        self.strall += '5'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def fourf(self):
         self.str += '4'
+        self.strall += '4'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def threef(self):
         self.str += '3'
+        self.strall += '3'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def twof(self):
         self.str += '2'
+        self.strall += '2'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def onef(self):
         self.str += '1'
+        self.strall += '1'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def zerof(self):
         self.str += '0'
+        self.strall += '0'
+        self.primer.setText(self.strall)
         self.LCD.display(self.str)
 
     def Cf(self):
