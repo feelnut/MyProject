@@ -46,8 +46,9 @@ class MyWidget(QMainWindow):
 
     def df(self):
         try:
-            self.numbers.append(float(self.str))
-            self.str = ''
+            if self.str:
+                self.numbers.append(float(self.str))
+                self.str = ''
             if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
                 del self.znak[len(self.znak) - 1]
@@ -57,11 +58,13 @@ class MyWidget(QMainWindow):
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
+            self.primer.setText('')
 
     def raf(self):
         try:
-            self.numbers.append(float(self.str))
-            self.str = ''
+            if self.str:
+                self.numbers.append(float(self.str))
+                self.str = ''
             if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
                 del self.znak[len(self.znak) - 1]
@@ -71,11 +74,13 @@ class MyWidget(QMainWindow):
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
+            self.primer.setText('')
 
     def sf(self):
         try:
-            self.numbers.append(float(self.str))
-            self.str = ''
+            if self.str:
+                self.numbers.append(float(self.str))
+                self.str = ''
             if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
                 del self.znak[len(self.znak) - 1]
@@ -85,11 +90,13 @@ class MyWidget(QMainWindow):
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
+            self.primer.setText('')
 
     def pf(self):
         try:
-            self.numbers.append(float(self.str))
-            self.str = ''
+            if self.str:
+                self.numbers.append(float(self.str))
+                self.str = ''
             if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
                 del self.znak[len(self.znak) - 1]
@@ -99,6 +106,7 @@ class MyWidget(QMainWindow):
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
+            self.primer.setText('')
 
     def altf(self):
         if self.checkalt:
@@ -227,6 +235,67 @@ class MyWidget(QMainWindow):
             self.str, self.znak, self.strall, self.numbers = '', [], '', []
         except ValueError:
             self.LCD.display('Error')
+            self.primer.setText('')
+
+    def deletef(self):
+        try:
+            self.str = self.str[:len(self.str) - 1]
+            if len(self.numbers) == len(self.znak):
+                self.strall = self.strall[:len(self.strall) - 1]
+            if self.str:
+                self.LCD.display(self.str)
+                self.primer.setText(self.strall)
+            else:
+                self.LCD.display(0)
+                self.primer.setText('')
+        except Exception:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
+    def factf(self):
+        try:
+            num1 = int(self.str)
+            self.str = ''
+            if num1 < 1 or num1 > 12:
+                raise ValueError
+            else:
+                factorial = 1
+                for i in range(2, num1 + 1):
+                    factorial *= i
+                self.LCD.display(factorial)
+                self.primer.setText(self.strall + '!')
+        except ValueError:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
+    def drobf(self):
+        try:
+            self.LCD.display(1 / float(self.str))
+            self.primer.setText('1/' + self.str)
+            self.str = ''
+        except ValueError:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
+    def sqrtf(self):
+        try:
+            if float(self.str) < 0:
+                raise ValueError
+            self.LCD.display(float(self.str) ** 0.5)
+            self.primer.setText('√' + self.str)
+            self.str = ''
+        except ValueError:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
+    def sqrf(self):
+        try:
+            self.LCD.display(float(self.str) ** 2)
+            self.primer.setText(self.str + '²')
+            self.str = ''
+        except ValueError:
+            self.LCD.display('Error')
+            self.primer.setText('')
 
 
 app = QApplication(sys.argv)
