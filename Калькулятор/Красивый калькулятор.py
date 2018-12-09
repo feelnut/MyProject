@@ -265,7 +265,7 @@ class MyWidget(QMainWindow):
 
     def factf(self):
         try:
-            num1 = int(self.str)
+            num1 = int(self.strall)
             self.str = ''
             if num1 < 1 or num1 > 12:
                 raise Exception
@@ -281,8 +281,8 @@ class MyWidget(QMainWindow):
 
     def drobf(self):
         try:
-            self.LCD.display(1 / float(self.str))
-            self.primer.setText('1/' + self.str)
+            self.LCD.display(1 / float(self.strall))
+            self.primer.setText('1/' + self.strall)
             self.str = ''
         except Exception:
             self.LCD.display('Error')
@@ -290,7 +290,7 @@ class MyWidget(QMainWindow):
 
     def sqrtf(self):
         try:
-            if float(self.str) < 0:
+            if float(self.strall) < 0:
                 raise Exception
             self.LCD.display(float(self.str) ** 0.5)
             self.primer.setText('√' + self.str)
@@ -301,8 +301,8 @@ class MyWidget(QMainWindow):
 
     def sqrf(self):
         try:
-            self.LCD.display(float(self.str) ** 2)
-            self.primer.setText(self.str + '²')
+            self.LCD.display(float(self.strall) ** 2)
+            self.primer.setText(self.strall + '²')
             self.str = ''
         except Exception:
             self.LCD.display('Error')
