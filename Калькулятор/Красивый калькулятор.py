@@ -36,12 +36,12 @@ class MyWidget(QMainWindow):
         self.fact.clicked.connect(self.factf)
         self.drob.clicked.connect(self.drobf)
         self.procent.clicked.connect(self.procentf)
-        self.tentotwo.clicked.connect(self.tentotwof)
+        '''self.tentotwo.clicked.connect(self.tentotwof)
         self.tentoeight.clicked.connect(self.tentoeightf)
         self.tentosixteen.clicked.connect(self.tentosixteenf)
         self.twototen.clicked.connect(self.twototenf)
         self.eighttoten.clicked.connect(self.eighttotenf)
-        self.sixteentoten.clicked.connect(self.sixteentotenf)
+        self.sixteentoten.clicked.connect(self.sixteentotenf)'''
         self.alt.clicked.connect(self.altf)
 
     def df(self):
@@ -55,6 +55,7 @@ class MyWidget(QMainWindow):
                 self.znak.append('/')
             else:
                 self.znak.append('/')
+                self.strall += '/'
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
@@ -71,6 +72,7 @@ class MyWidget(QMainWindow):
                 self.znak.append('-')
             else:
                 self.znak.append('-')
+                self.strall += '-'
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
@@ -87,6 +89,7 @@ class MyWidget(QMainWindow):
                 self.znak.append('+')
             else:
                 self.znak.append('+')
+                self.strall += '+'
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
@@ -103,6 +106,7 @@ class MyWidget(QMainWindow):
                 self.znak.append('*')
             else:
                 self.znak.append('*')
+                self.strall += '*'
             self.primer.setText(self.strall)
         except ValueError:
             self.LCD.display('Error')
@@ -294,6 +298,38 @@ class MyWidget(QMainWindow):
             self.primer.setText(self.str + '²')
             self.str = ''
         except ValueError:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
+    def rf(self):
+        try:
+            if self.str:
+                self.numbers.append(float(self.str))
+                self.str = ''
+            if len(self.znak) == len(self.numbers):
+                del self.znak[0]
+                self.numbers[0] = -1 * self.numbers[0]
+            while self.znak:
+                if '*' in self.znak or '/' in self.znak:
+                    for i in range(len(self.znak)):
+                        if self.znak[i] == '*':
+                            self.numbers[i] = self.numbers[i] * self.numbers[i + 1]
+                            del self.znak[i]
+                        elif self.znak[i] == '/':
+                            self.numbers[i] = self.numbers[i] / self.numbers[i + 1]
+                            del self.znak[i]
+                elif '+' in self.znak or '-' in self.znak:
+                    for i in range(len(self.znak)):
+                        if self.znak[i] == '-':
+                            self.numbers[i] = self.numbers[i] - self.numbers[i + 1]
+                            del self.znak[i]
+                        elif self.znak[i] == '+':
+                            self.numbers[i] = self.numbers[i] + self.numbers[i + 1]
+                            del self.znak[i]
+            self.primer.setText(self.strall)
+            self.LCD.display(self.numbers[0])
+            self.str, self.znak, self.strall, self.numbers = '', [], '', []
+        except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
