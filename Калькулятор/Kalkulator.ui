@@ -70,8 +70,8 @@
    <widget class="QPushButton" name="fact">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>170</y>
+      <x>300</x>
+      <y>120</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -83,8 +83,8 @@
    <widget class="QPushButton" name="sqrt">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>170</y>
+      <x>250</x>
+      <y>120</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -96,7 +96,7 @@
    <widget class="QPushButton" name="sqr">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>250</x>
       <y>170</y>
       <width>50</width>
       <height>50</height>
@@ -109,8 +109,8 @@
    <widget class="QPushButton" name="drob">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>170</y>
+      <x>350</x>
+      <y>120</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -333,7 +333,7 @@
    <widget class="QPushButton" name="delete1">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>50</x>
       <y>120</y>
       <width>50</width>
       <height>50</height>
@@ -352,7 +352,7 @@
    <widget class="QPushButton" name="tentotwo">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>100</x>
       <y>120</y>
       <width>50</width>
       <height>50</height>
@@ -365,8 +365,8 @@
    <widget class="QPushButton" name="tentoeight">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>170</y>
+      <x>150</x>
+      <y>120</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -378,8 +378,8 @@
    <widget class="QPushButton" name="tentosixteen">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>170</y>
+      <x>200</x>
+      <y>120</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -391,8 +391,8 @@
    <widget class="QPushButton" name="twototen">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>120</y>
+      <x>100</x>
+      <y>170</y>
       <width>50</width>
       <height>50</height>
      </rect>
@@ -404,7 +404,7 @@
    <widget class="QPushButton" name="eighttoten">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>150</x>
       <y>170</y>
       <width>50</width>
       <height>50</height>
@@ -417,7 +417,7 @@
    <widget class="QPushButton" name="sixteentoten">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>200</x>
       <y>170</y>
       <width>50</width>
       <height>50</height>
@@ -430,8 +430,8 @@
    <widget class="QPushButton" name="procent">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>120</y>
+      <x>300</x>
+      <y>170</y>
       <width>100</width>
       <height>50</height>
      </rect>
@@ -443,8 +443,8 @@
    <widget class="QPushButton" name="alt">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>120</y>
+      <x>0</x>
+      <y>170</y>
       <width>100</width>
       <height>50</height>
      </rect>
