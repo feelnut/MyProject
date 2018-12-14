@@ -43,6 +43,35 @@ class MyWidget(QMainWindow):
         self.eighttoten.clicked.connect(self.eighttotenf)
         self.sixteentoten.clicked.connect(self.sixteentotenf)
         self.alt.clicked.connect(self.altf)
+        self.ans.clicked.connect(self.ansf)
+
+        self.zap.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.zero.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.one.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.two.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.three.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.four.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.five.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.six.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.seven.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.eight.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.nine.setStyleSheet("QPushButton {color: #0000FF;}")
+        self.d.setStyleSheet("QPushButton {color: #FFA500;}")
+        self.s.setStyleSheet("QPushButton {color: #FFA500;}")
+        self.p.setStyleSheet("QPushButton {color: #FFA500;}")
+        self.ra.setStyleSheet("QPushButton {color: #FFA500;}")
+        self.r.setStyleSheet("QPushButton {color: #FF0000;}")
+        self.procent.setStyleSheet("QPushButton {color: #FFA500;}")
+        self.tentotwo.setStyleSheet("QPushButton {color: #FF55FF;}")
+        self.tentoeight.setStyleSheet("QPushButton {color: #FF55FF;}")
+        self.tentosixteen.setStyleSheet("QPushButton {color: #FF55FF;}")
+        self.sixteentoten.setStyleSheet("QPushButton {color: #FF55FF;}")
+        self.eighttoten.setStyleSheet("QPushButton {color: #FF55FF;}")
+        self.twototen.setStyleSheet("QPushButton {color: #FF55FF;}")
+        self.drob.setStyleSheet("QPushButton {color: #00AA00;}")
+        self.sqr.setStyleSheet("QPushButton {color: #00AA00;}")
+        self.sqrt.setStyleSheet("QPushButton {color: #00AA00;}")
+        self.fact.setStyleSheet("QPushButton {color: #00AA00;}")
 
     def df(self):
         try:
@@ -116,10 +145,27 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    def procentf(self):
+        try:
+            if self.str:
+                self.numbers.append(float(self.str))
+                self.str = ''
+            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+                self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
+                del self.znak[len(self.znak) - 1]
+                self.znak.append('%')
+            else:
+                self.znak.append('%')
+                self.strall += '%'
+            self.primer.setText(self.strall)
+        except Exception:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
     def altf(self):
         if self.checkalt:
             self.checkalt = False
-            self.alt.setStyleSheet("QPushButton color: #000000;}")
+            self.alt.setStyleSheet("QPushButton {color: #000000;}")
         else:
             self.checkalt = True
             self.alt.setStyleSheet("QPushButton {color: #FF0000;}")
@@ -231,23 +277,6 @@ class MyWidget(QMainWindow):
         self.LCD.display(self.str)
         self.primer.setText(self.strall)
 
-    def procentf(self):
-        try:
-            if self.str:
-                self.numbers.append(float(self.str))
-                self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
-                self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + self.znak)
-                del self.znak[len(self.znak) - 1]
-                self.znak.append('%')
-            else:
-                self.znak.append('%')
-                self.strall += '%'
-            self.primer.setText(self.strall)
-        except Exception:
-            self.LCD.display('Error')
-            self.primer.setText('')
-
     def deletef(self):
         try:
             self.str = self.str[:len(self.str) - 1]
@@ -349,7 +378,18 @@ class MyWidget(QMainWindow):
                             break
             self.primer.setText(self.strall)
             self.LCD.display(self.numbers[0])
+            self.maybenum = self.numbers[0]
             self.str, self.znak, self.strall, self.numbers = '', [], '', []
+        except Exception:
+            self.LCD.display('Error')
+            self.primer.setText('')
+
+    def ansf(self):
+        try:
+            self.numbers.append(self.maybenum)
+
+            self.strall += str(self.maybenum)
+            self.primer.setText(self.strall)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
@@ -364,9 +404,11 @@ class MyWidget(QMainWindow):
                 num = int(num / 2)
             if n:
                 if self.znak:
-                    self.LCD.display(-1 * int(n))
+                    k = -1 * int(n)
                 else:
-                    self.LCD.display(n)
+                    k = int(n)
+                self.LCD.display(k)
+                self.maybenum = k
             else:
                 self.LCD.display(0)
             self.str = ''
@@ -384,9 +426,11 @@ class MyWidget(QMainWindow):
                 num = int(num / 8)
             if n:
                 if self.znak:
-                    self.LCD.display(-1 * int(n))
+                    k = -1 * int(n)
                 else:
-                    self.LCD.display(n)
+                    k = int(n)
+                self.LCD.display(k)
+                self.maybenum = k
             else:
                 self.LCD.display(0)
             self.str = ''
@@ -408,9 +452,11 @@ class MyWidget(QMainWindow):
                 num = int(num / 16)
             if n:
                 if self.znak:
-                    self.LCD.display(-1 * int(n))
+                    k = -1 * int(n)
                 else:
-                    self.LCD.display(n)
+                    k = int(n)
+                self.LCD.display(k)
+                self.maybenum = k
             else:
                 self.LCD.display(0)
             self.str = ''
@@ -421,11 +467,12 @@ class MyWidget(QMainWindow):
     def twototenf(self):
         try:
             if self.znak:
-                self.LCD.display(-1 * int(self.str, base=2))
-                self.str = ''
+                k = -1 * int(self.str, base=2)
             else:
-                self.LCD.display(int(self.str, base=2))
-                self.str = ''
+                k = int(self.str, base=2)
+            self.LCD.display(k)
+            self.maybenum = k
+            self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
@@ -433,11 +480,12 @@ class MyWidget(QMainWindow):
     def eighttotenf(self):
         try:
             if self.znak:
-                self.LCD.display(-1 * int(self.str, base=8))
-                self.str = ''
+                k = -1 * int(self.str, base=8)
             else:
-                self.LCD.display(int(self.str, base=8))
-                self.str = ''
+                k = int(self.str, base=8)
+            self.LCD.display(k)
+            self.maybenum = k
+            self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
@@ -445,11 +493,12 @@ class MyWidget(QMainWindow):
     def sixteentotenf(self):
         try:
             if self.znak:
-                self.LCD.display(-1 * int(self.str, base=16))
-                self.str = ''
+                k = -1 * int(self.str, base=16)
             else:
-                self.LCD.display(int(self.str, base=16))
-                self.str = ''
+                k = int(self.str, base=16)
+            self.LCD.display(k)
+            self.maybenum = k
+            self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
