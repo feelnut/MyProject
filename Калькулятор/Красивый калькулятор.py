@@ -78,7 +78,7 @@ class MyWidget(QMainWindow):
             if self.str:
                 self.numbers.append(float(self.str))
                 self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['/'])
                 del self.znak[len(self.znak) - 1]
                 self.znak.append('/')
@@ -96,7 +96,7 @@ class MyWidget(QMainWindow):
                 if self.str:
                     self.numbers.append(float(self.str))
                     self.str = ''
-                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
                     self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['-'])
                     del self.znak[len(self.znak) - 1]
                     self.znak.append('-')
@@ -116,7 +116,7 @@ class MyWidget(QMainWindow):
             if self.str:
                 self.numbers.append(float(self.str))
                 self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['+'])
                 del self.znak[len(self.znak) - 1]
                 self.znak.append('+')
@@ -133,7 +133,7 @@ class MyWidget(QMainWindow):
             if self.str:
                 self.numbers.append(float(self.str))
                 self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['*'])
                 del self.znak[len(self.znak) - 1]
                 self.znak.append('*')
@@ -150,7 +150,7 @@ class MyWidget(QMainWindow):
             if self.str:
                 self.numbers.append(float(self.str))
                 self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
                 self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
                 del self.znak[len(self.znak) - 1]
                 self.znak.append('%')
