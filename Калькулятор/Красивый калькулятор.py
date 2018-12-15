@@ -282,9 +282,17 @@ class MyWidget(QMainWindow):
             self.str = self.str[:len(self.str) - 1]
             if len(self.numbers) == len(self.znak):
                 self.strall = self.strall[:len(self.strall) - 1]
-            if self.str:
-                self.LCD.display(self.str)
-                self.primer.setText(self.strall)
+            if self.strall:
+                if self.str:
+                    self.LCD.display(self.str)
+                    self.primer.setText(self.strall)
+                else:
+                    del self.znak[-1]
+                    self.LCD.display(0)
+                    self.primer.setText(self.strall)
+                if self.znak:
+                    if self.znak[-1] == '%':
+                        self.znak.append('%')
             else:
                 self.LCD.display(0)
                 self.primer.setText('')
@@ -303,6 +311,7 @@ class MyWidget(QMainWindow):
                 for i in range(2, num1 + 1):
                     factorial *= i
                 self.LCD.display(factorial)
+                self.maybenum = factorial
                 self.primer.setText(self.strall + '!')
         except Exception:
             self.LCD.display('Error')
@@ -310,7 +319,9 @@ class MyWidget(QMainWindow):
 
     def drobf(self):
         try:
-            self.LCD.display(1 / float(self.strall))
+            k = 1 / float(self.strall)
+            self.LCD.display(k)
+            self.maybenum = k
             self.primer.setText('1/' + self.strall)
             self.str = ''
         except Exception:
@@ -321,7 +332,9 @@ class MyWidget(QMainWindow):
         try:
             if float(self.strall) < 0:
                 raise Exception
-            self.LCD.display(float(self.str) ** 0.5)
+            k = float(self.str) ** 0.5
+            self.LCD.display(k)
+            self.maybenum = k
             self.primer.setText('√' + self.str)
             self.str = ''
         except Exception:
@@ -330,7 +343,9 @@ class MyWidget(QMainWindow):
 
     def sqrf(self):
         try:
-            self.LCD.display(float(self.strall) ** 2)
+            k = float(self.strall) ** 2
+            self.LCD.display(k)
+            self.maybenum = k
             self.primer.setText(self.strall + '²')
             self.str = ''
         except Exception:
@@ -387,7 +402,6 @@ class MyWidget(QMainWindow):
     def ansf(self):
         try:
             self.numbers.append(self.maybenum)
-
             self.strall += str(self.maybenum)
             self.primer.setText(self.strall)
         except Exception:
