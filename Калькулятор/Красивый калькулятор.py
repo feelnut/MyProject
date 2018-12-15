@@ -183,7 +183,6 @@ class MyWidget(QMainWindow):
             self.five.setText('E')
             self.six.setText('F')
 
-
     def ninef(self):
         self.str += '9'
         self.strall += '9'
