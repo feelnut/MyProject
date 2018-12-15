@@ -1,6 +1,7 @@
 import sys
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QLineEdit, QLCDNumber
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import math
 
 
 class MyWidget(QMainWindow):
@@ -8,7 +9,7 @@ class MyWidget(QMainWindow):
         super().__init__()
         uic.loadUi('Kalkulator.ui', self)
         self.setWindowTitle('Калькулятор')
-        self.LCD.setDigitCount(15)
+        self.LCD.setDigitCount(19)
         self.checkalt = False
 
         self.str, self.znak, self.strall, self.numbers = '', [], '', []
@@ -75,17 +76,17 @@ class MyWidget(QMainWindow):
 
     def df(self):
         try:
-            if self.str:
-                self.numbers.append(float(self.str))
-                self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['/'])
-                del self.znak[len(self.znak) - 1]
+            if self.strall and self.strall != '-':
+                if self.str:
+                    self.numbers.append(float(self.str))
+                    self.str = ''
+                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['/'])
+                    del self.znak[len(self.znak) - 1]
+                else:
+                    self.strall += '/'
                 self.znak.append('/')
-            else:
-                self.znak.append('/')
-                self.strall += '/'
-            self.primer.setText(self.strall)
+                self.primer.setText(self.strall)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
@@ -99,65 +100,65 @@ class MyWidget(QMainWindow):
                 if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
                     self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['-'])
                     del self.znak[len(self.znak) - 1]
-                    self.znak.append('-')
                 else:
-                    self.znak.append('-')
                     self.strall += '-'
+                self.znak.append('-')
                 self.primer.setText(self.strall)
             else:
                 self.znak.append('-')
                 self.strall += '-'
+                self.primer.setText(self.strall)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def sf(self):
         try:
-            if self.str:
-                self.numbers.append(float(self.str))
-                self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['+'])
-                del self.znak[len(self.znak) - 1]
+            if self.strall and self.strall != '-':
+                if self.str:
+                    self.numbers.append(float(self.str))
+                    self.str = ''
+                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['+'])
+                    del self.znak[len(self.znak) - 1]
+                else:
+                    self.strall += '+'
                 self.znak.append('+')
-            else:
-                self.znak.append('+')
-                self.strall += '+'
-            self.primer.setText(self.strall)
+                self.primer.setText(self.strall)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def pf(self):
         try:
-            if self.str:
-                self.numbers.append(float(self.str))
-                self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['*'])
-                del self.znak[len(self.znak) - 1]
+            if self.strall and self.strall != '-':
+                if self.str:
+                    self.numbers.append(float(self.str))
+                    self.str = ''
+                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['*'])
+                    del self.znak[len(self.znak) - 1]
+                else:
+                    self.strall += '*'
                 self.znak.append('*')
-            else:
-                self.znak.append('*')
-                self.strall += '*'
-            self.primer.setText(self.strall)
+                self.primer.setText(self.strall)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def procentf(self):
         try:
-            if self.str:
-                self.numbers.append(float(self.str))
-                self.str = ''
-            if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
-                del self.znak[len(self.znak) - 1]
+            if self.strall and self.strall != '-':
+                if self.str:
+                    self.numbers.append(float(self.str))
+                    self.str = ''
+                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
+                    del self.znak[len(self.znak) - 1]
+                else:
+                    self.strall += '%'
                 self.znak.append('%')
-            else:
-                self.znak.append('%')
-                self.strall += '%'
-            self.primer.setText(self.strall)
+                self.primer.setText(self.strall)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
@@ -166,105 +167,96 @@ class MyWidget(QMainWindow):
         if self.checkalt:
             self.checkalt = False
             self.alt.setStyleSheet("QPushButton {color: #000000;}")
+            self.one.setText('1')
+            self.two.setText('2')
+            self.three.setText('3')
+            self.four.setText('4')
+            self.five.setText('5')
+            self.six.setText('6')
         else:
             self.checkalt = True
             self.alt.setStyleSheet("QPushButton {color: #FF0000;}")
+            self.one.setText('A')
+            self.two.setText('B')
+            self.three.setText('C')
+            self.four.setText('D')
+            self.five.setText('E')
+            self.six.setText('F')
+
 
     def ninef(self):
         self.str += '9'
         self.strall += '9'
-        self.primer.setText(self.strall)
-        self.LCD.display(self.str)
+        self.fornumbers()
 
     def eightf(self):
         self.str += '8'
         self.strall += '8'
-        self.primer.setText(self.strall)
-        self.LCD.display(self.str)
+        self.fornumbers()
 
     def sevenf(self):
         self.str += '7'
         self.strall += '7'
-        self.primer.setText(self.strall)
-        self.LCD.display(self.str)
+        self.fornumbers()
 
     def sixf(self):
         if self.checkalt == False:
             self.str += '6'
             self.strall += '6'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
         else:
             self.str += 'F'
             self.strall += 'F'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
+        self.fornumbers()
 
     def fivef(self):
         if self.checkalt == False:
             self.str += '5'
             self.strall += '5'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
         else:
             self.str += 'E'
             self.strall += 'E'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
+        self.fornumbers()
 
     def fourf(self):
         if self.checkalt == False:
             self.str += '4'
             self.strall += '4'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
         else:
             self.str += 'D'
             self.strall += 'D'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
+        self.fornumbers()
 
     def threef(self):
         if self.checkalt == False:
             self.str += '3'
             self.strall += '3'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
         else:
             self.str += 'C'
             self.strall += 'C'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
+        self.fornumbers()
 
     def twof(self):
         if self.checkalt == False:
             self.str += '2'
             self.strall += '2'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
         else:
             self.str += 'B'
             self.strall += 'B'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
+        self.fornumbers()
 
     def onef(self):
         if self.checkalt == False:
             self.str += '1'
             self.strall += '1'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
         else:
             self.str += 'A'
             self.strall += 'A'
-            self.primer.setText(self.strall)
-            self.LCD.display(self.str)
+        self.fornumbers()
 
     def zerof(self):
         self.str += '0'
         self.strall += '0'
-        self.primer.setText(self.strall)
-        self.LCD.display(self.str)
+        self.fornumbers()
 
     def Cf(self):
         self.str, self.znak, self.strall, self.numbers = '', [], '', []
@@ -272,24 +264,33 @@ class MyWidget(QMainWindow):
         self.primer.setText('')
 
     def zapf(self):
-        self.str += '.'
-        self.strall += '.'
+        if not self.strall:
+            self.str += '0.'
+            self.strall += '0.'
+        else:
+            self.str += '.'
+            self.strall += '.'
+        self.fornumbers()
+
+    def fornumbers(self):
         self.LCD.display(self.str)
         self.primer.setText(self.strall)
 
     def deletef(self):
         try:
+            if self.strall == '-':
+                self.strall, self.znak = '', []
+                self.primer.setText(self.strall)
             self.str = self.str[:len(self.str) - 1]
             if len(self.numbers) == len(self.znak):
                 self.strall = self.strall[:len(self.strall) - 1]
             if self.strall:
                 if self.str:
                     self.LCD.display(self.str)
-                    self.primer.setText(self.strall)
                 else:
                     del self.znak[-1]
                     self.LCD.display(0)
-                    self.primer.setText(self.strall)
+                self.primer.setText(self.strall)
                 if self.znak:
                     if self.znak[-1] == '%':
                         self.znak.append('%')
@@ -300,222 +301,196 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
-    def factf(self):
+    def drobf(self):
         try:
-            num1 = int(self.strall)
-            self.str = ''
-            if num1 < 1 or num1 > 12:
-                raise Exception
-            else:
-                factorial = 1
-                for i in range(2, num1 + 1):
-                    factorial *= i
-                self.LCD.display(factorial)
-                self.maybenum = factorial
-                self.primer.setText(self.strall + '!')
+            if self.strall:
+                k = 1 / float(self.strall)
+                self.LCD.display(k)
+                self.maybenum = k
+                self.primer.setText('1/' + self.strall)
+                self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
-    def drobf(self):
+    def factf(self):
         try:
-            k = 1 / float(self.strall)
-            self.LCD.display(k)
-            self.maybenum = k
-            self.primer.setText('1/' + self.strall)
-            self.str = ''
+            if self.strall:
+                num1 = int(self.strall)
+                self.str = ''
+                if num1 < 13:
+                    self.maybenum = math.factorial(num1)
+                else:
+                    self.maybenum = 0
+                self.LCD.display(str(math.factorial(num1)))
+                self.primer.setText(self.strall + '!')
+                self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def sqrtf(self):
         try:
-            if float(self.strall) < 0:
-                raise Exception
-            k = float(self.str) ** 0.5
-            self.LCD.display(k)
-            self.maybenum = k
-            self.primer.setText('√' + self.str)
-            self.str = ''
+            if self.strall:
+                k = float(self.strall) ** 0.5
+                self.LCD.display(k)
+                self.maybenum = k
+                self.primer.setText('√' + self.strall)
+                self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def sqrf(self):
         try:
-            k = float(self.strall) ** 2
-            self.LCD.display(k)
-            self.maybenum = k
-            self.primer.setText(self.strall + '²')
-            self.str = ''
+            if self.strall:
+                k = float(self.strall) ** 2
+                self.LCD.display(k)
+                self.maybenum = k
+                self.primer.setText(self.strall + '²')
+                self.str = ''
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def rf(self):
         try:
-            if self.str:
-                self.numbers.append(float(self.str))
-                self.str = ''
-            if self.strall[0] == '-':
-                del self.znak[0]
-                self.numbers[0] = -1 * self.numbers[0]
-            while self.znak:
-                if '%' in self.znak:
-                    for i in range(len(self.znak)):
-                        if self.znak[i] == '%':
-                            self.numbers[i] = self.numbers[i] / 100
-                            del self.znak[i]
-                            break
-                elif '*' in self.znak or '/' in self.znak:
-                    for i in range(len(self.znak)):
-                        if self.znak[i] == '*':
-                            self.numbers[i] = self.numbers[i] * self.numbers[i + 1]
-                            del self.znak[i]
-                            del self.numbers[i + 1]
-                            break
-                        elif self.znak[i] == '/':
-                            self.numbers[i] = self.numbers[i] / self.numbers[i + 1]
-                            del self.znak[i]
-                            del self.numbers[i + 1]
-                            break
-                elif '+' in self.znak or '-' in self.znak:
-                    for i in range(len(self.znak)):
-                        if self.znak[i] == '-':
-                            self.numbers[i] = self.numbers[i] - self.numbers[i + 1]
-                            del self.znak[i]
-                            del self.numbers[i + 1]
-                            break
-                        elif self.znak[i] == '+':
-                            self.numbers[i] = self.numbers[i] + self.numbers[i + 1]
-                            del self.znak[i]
-                            del self.numbers[i + 1]
-                            break
-            self.primer.setText(self.strall)
-            self.LCD.display(self.numbers[0])
-            self.maybenum = self.numbers[0]
-            self.str, self.znak, self.strall, self.numbers = '', [], '', []
+            if self.strall:
+                if self.str:
+                    self.numbers.append(float(self.str))
+                    self.str = ''
+                if self.strall[0] == '-':
+                    del self.znak[0]
+                    self.numbers[0] = -1 * self.numbers[0]
+                while self.znak:
+                    if '%' in self.znak:
+                        for i in range(len(self.znak)):
+                            if self.znak[i] == '%':
+                                self.numbers[i] = self.numbers[i] / 100
+                                del self.znak[i]
+                                break
+                    elif '*' in self.znak or '/' in self.znak:
+                        for i in range(len(self.znak)):
+                            if self.znak[i] == '*':
+                                self.numbers[i] = self.numbers[i] * self.numbers[i + 1]
+                                del self.znak[i]
+                                del self.numbers[i + 1]
+                                break
+                            elif self.znak[i] == '/':
+                                self.numbers[i] = self.numbers[i] / self.numbers[i + 1]
+                                del self.znak[i]
+                                del self.numbers[i + 1]
+                                break
+                    elif '+' in self.znak or '-' in self.znak:
+                        for i in range(len(self.znak)):
+                            if self.znak[i] == '-':
+                                self.numbers[i] = self.numbers[i] - self.numbers[i + 1]
+                                del self.znak[i]
+                                del self.numbers[i + 1]
+                                break
+                            elif self.znak[i] == '+':
+                                self.numbers[i] = self.numbers[i] + self.numbers[i + 1]
+                                del self.znak[i]
+                                del self.numbers[i + 1]
+                                break
+                self.primer.setText(self.strall)
+                self.LCD.display(self.numbers[0])
+                self.maybenum = self.numbers[0]
+                self.str, self.znak, self.strall, self.numbers = '', [], '', []
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def ansf(self):
         try:
-            self.numbers.append(self.maybenum)
+            self.str = str(self.maybenum)
             self.strall += str(self.maybenum)
             self.primer.setText(self.strall)
+            self.LCD.display(self.str)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def tentotwof(self):
         try:
-            num = int(self.str)
-            n = ''
-            while num > 0:
-                y = str(num % 2)
-                n = y + n
-                num = int(num / 2)
-            if n:
-                if self.znak:
-                    k = -1 * int(n)
-                else:
-                    k = int(n)
-                self.LCD.display(k)
-                self.maybenum = k
-            else:
-                self.LCD.display(0)
-            self.str = ''
+            if self.strall:
+                num = int(self.str)
+                n = ''
+                while num > 0:
+                    y = str(num % 2)
+                    n = y + n
+                    num = int(num / 2)
+                k = -1 * int(n) if n and self.znak else int(n)
+                self.fortofunc(k)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def tentoeightf(self):
         try:
-            num = int(self.str)
-            n = ''
-            while num > 0:
-                y = str(num % 8)
-                n = y + n
-                num = int(num / 8)
-            if n:
-                if self.znak:
-                    k = -1 * int(n)
-                else:
-                    k = int(n)
-                self.LCD.display(k)
-                self.maybenum = k
-            else:
-                self.LCD.display(0)
-            self.str = ''
+            if self.strall:
+                num = int(self.str)
+                n = '' if num > 0 else '0'
+                while num > 0:
+                    y = str(num % 8)
+                    n = y + n
+                    num = int(num / 8)
+                k = -1 * int(n) if n and self.znak else int(n)
+                self.fortofunc(k)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def tentosixteenf(self):
         try:
-            num = int(self.str)
-            n = ''
-            l = ['A', 'B', 'C', 'D', 'E', 'F']
-            while num > 0:
-                y = int(num % 16)
-                if y < 10:
-                    n = str(y) + n
-                else:
-                    n = l[y - 10] + n
-                num = int(num / 16)
-            if n:
-                if self.znak:
-                    k = -1 * int(n)
-                else:
-                    k = int(n)
-                self.LCD.display(k)
-                self.maybenum = k
-            else:
-                self.LCD.display(0)
-            self.str = ''
+            if self.strall:
+                num = int(self.str)
+                n = ''
+                l = ['A', 'B', 'C', 'D', 'E', 'F']
+                while num > 0:
+                    y = int(num % 16)
+                    if y < 10:
+                        n = str(y) + n
+                    else:
+                        n = l[y - 10] + n
+                    num = int(num / 16)
+                k = '-' + n if n and self.znak else n
+                self.fortofunc(k)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def twototenf(self):
         try:
-            if self.znak:
-                k = -1 * int(self.str, base=2)
-            else:
-                k = int(self.str, base=2)
-            self.LCD.display(k)
-            self.maybenum = k
-            self.str = ''
+            if self.strall:
+                k = -1 * int(self.str, base=2) if self.znak else int(self.str, base=2)
+                self.fortofunc(k)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def eighttotenf(self):
         try:
-            if self.znak:
-                k = -1 * int(self.str, base=8)
-            else:
-                k = int(self.str, base=8)
-            self.LCD.display(k)
-            self.maybenum = k
-            self.str = ''
+            if self.strall:
+                k = -1 * int(self.str, base=8) if self.znak else int(self.str, base=8)
+                self.fortofunc(k)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
     def sixteentotenf(self):
         try:
-            if self.znak:
-                k = -1 * int(self.str, base=16)
-            else:
-                k = int(self.str, base=16)
-            self.LCD.display(k)
-            self.maybenum = k
-            self.str = ''
+            if self.strall:
+                k = -1 * int(self.str, base=16) if self.znak else int(self.str, base=16)
+                self.fortofunc(k)
         except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
+
+    def fortofunc(self, k):
+        self.LCD.display(k)
+        self.maybenum = k
+        self.str = ''
 
 
 app = QApplication(sys.argv)
