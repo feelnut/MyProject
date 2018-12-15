@@ -129,7 +129,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>1 (Alt -&gt; A)</string>
+     <string>1</string>
     </property>
    </widget>
    <widget class="QPushButton" name="seven">
@@ -155,7 +155,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>4 (Alt -&gt; D)</string>
+     <string>4</string>
     </property>
    </widget>
    <widget class="QPushButton" name="zap">
@@ -194,7 +194,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>5 (Alt -&gt; E)</string>
+     <string>5</string>
     </property>
    </widget>
    <widget class="QPushButton" name="two">
@@ -207,7 +207,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>2 (Alt -&gt; B)</string>
+     <string>2</string>
     </property>
    </widget>
    <widget class="QPushButton" name="zero">
@@ -246,7 +246,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>6 (Alt -&gt; F)</string>
+     <string>6</string>
     </property>
    </widget>
    <widget class="QPushButton" name="three">
@@ -259,7 +259,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>3 (Alt -&gt; C)</string>
+     <string>3</string>
     </property>
     <property name="shortcut">
      <string>Ctrl+S</string>
@@ -445,7 +445,7 @@
      <rect>
       <x>0</x>
       <y>170</y>
-      <width>100</width>
+      <width>50</width>
       <height>50</height>
      </rect>
     </property>
@@ -473,6 +473,25 @@
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ans">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>170</y>
+      <width>50</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ans</string>
     </property>
    </widget>
   </widget>
