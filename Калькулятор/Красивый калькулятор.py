@@ -196,57 +196,33 @@ class MyWidget(QMainWindow):
         self.fornumbers()
 
     def sixf(self):
-        if self.checkalt == False:
-            self.str += '6'
-            self.strall += '6'
-        else:
-            self.str += 'F'
-            self.strall += 'F'
+        self.str += 'F' if self.checkalt else '6'
+        self.strall += 'F' if self.checkalt else '6'
         self.fornumbers()
 
     def fivef(self):
-        if self.checkalt == False:
-            self.str += '5'
-            self.strall += '5'
-        else:
-            self.str += 'E'
-            self.strall += 'E'
+        self.str += 'E' if self.checkalt else '5'
+        self.strall += 'E' if self.checkalt else '5'
         self.fornumbers()
 
     def fourf(self):
-        if self.checkalt == False:
-            self.str += '4'
-            self.strall += '4'
-        else:
-            self.str += 'D'
-            self.strall += 'D'
+        self.str += 'D' if self.checkalt else '4'
+        self.strall += 'D' if self.checkalt else '4'
         self.fornumbers()
 
     def threef(self):
-        if self.checkalt == False:
-            self.str += '3'
-            self.strall += '3'
-        else:
-            self.str += 'C'
-            self.strall += 'C'
+        self.str += 'C' if self.checkalt else '3'
+        self.strall += 'C' if self.checkalt else '3'
         self.fornumbers()
 
     def twof(self):
-        if self.checkalt == False:
-            self.str += '2'
-            self.strall += '2'
-        else:
-            self.str += 'B'
-            self.strall += 'B'
+        self.str += 'B' if self.checkalt else '2'
+        self.strall += 'B' if self.checkalt else '2'
         self.fornumbers()
 
     def onef(self):
-        if self.checkalt == False:
-            self.str += '1'
-            self.strall += '1'
-        else:
-            self.str += 'A'
-            self.strall += 'A'
+        self.str += 'A' if self.checkalt else '1'
+        self.strall += 'A' if self.checkalt else '1'
         self.fornumbers()
 
     def zerof(self):
@@ -260,12 +236,8 @@ class MyWidget(QMainWindow):
         self.primer.setText('')
 
     def zapf(self):
-        if not self.strall:
-            self.str += '0.'
-            self.strall += '0.'
-        else:
-            self.str += '.'
-            self.strall += '.'
+        self.str += '.' if self.strall else '0.'
+        self.strall += '.' if self.strall else '0.'
         self.fornumbers()
 
     def fornumbers(self):
