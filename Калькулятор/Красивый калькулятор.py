@@ -6,6 +6,7 @@ import math
 
 class MyWidget(QMainWindow):
     def __init__(self):
+        # настройка программы
         super().__init__()
         uic.loadUi('Kalkulator.ui', self)
         self.setWindowTitle('Калькулятор')
@@ -15,6 +16,7 @@ class MyWidget(QMainWindow):
 
         self.str, self.znak, self.strall, self.numbers, self.sys = '', [], '', [], 10
 
+        # обработка нажатия кнопок
         self.d.clicked.connect(self.df)
         self.s.clicked.connect(self.sf)
         self.p.clicked.connect(self.pf)
@@ -44,6 +46,7 @@ class MyWidget(QMainWindow):
         self.sixteenss.clicked.connect(self.sixteensf)
         self.alt.clicked.connect(self.altf)
 
+        # обработка цветов кнопок
         self.zap.setStyleSheet("QPushButton {color: #0000FF;}")
         self.zero.setStyleSheet("QPushButton {color: #0000FF;}")
         self.one.setStyleSheet("QPushButton {color: #0000FF;}")
@@ -70,6 +73,7 @@ class MyWidget(QMainWindow):
         self.sqrt.setStyleSheet("QPushButton {color: #00AA00;}")
         self.fact.setStyleSheet("QPushButton {color: #00AA00;}")
 
+    # функция деления
     def df(self):
         try:
             if self.strall and self.strall != '-':
@@ -87,6 +91,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # функция вычитания
     def raf(self):
         try:
             if self.str or self.strall:
@@ -108,6 +113,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # функция суммы
     def sf(self):
         try:
             if self.strall and self.strall != '-':
@@ -125,6 +131,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # функция произведения
     def pf(self):
         try:
             if self.strall and self.strall != '-':
@@ -142,6 +149,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # функция процента
     def procentf(self):
         try:
             if self.strall and self.strall != '-':
@@ -159,6 +167,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # кнопка Alt
     def altf(self):
         if self.sys == 16:
             if self.checkalt:
@@ -180,6 +189,7 @@ class MyWidget(QMainWindow):
                 self.five.setText('E')
                 self.six.setText('F')
 
+    # цифры от 9 до 0 и точка
     def ninef(self):
         self.str += '9'
         self.strall += '9'
@@ -230,20 +240,23 @@ class MyWidget(QMainWindow):
         self.strall += '0'
         self.fornumbers()
 
-    def Cf(self):
-        self.str, self.znak, self.strall, self.numbers = '', [], '', []
-        self.LCD.display(0)
-        self.primer.setText('')
-
     def zapf(self):
         self.str += '.' if self.strall else '0.'
         self.strall += '.' if self.strall else '0.'
         self.fornumbers()
 
+    # очистка памяти калькулятора
+    def Cf(self):
+        self.str, self.znak, self.strall, self.numbers = '', [], '', []
+        self.LCD.display(0)
+        self.primer.setText('')
+
+    # функция для корректного отображения цифр на LCD
     def fornumbers(self):
         self.LCD.display(self.str)
         self.primer.setText(self.strall)
 
+    # Функция удаления последнего символа
     def deletef(self):
         try:
             if self.strall == '-':
@@ -273,6 +286,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # деление 1 на полученое число
     def drobf(self):
         try:
             self.trans()
@@ -284,6 +298,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # вычисление факториала
     def factf(self):
         try:
             self.trans()
@@ -294,6 +309,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # корень из полученного числа
     def sqrtf(self):
         try:
             self.trans()
@@ -305,6 +321,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # квадрат полученного числа
     def sqrf(self):
         try:
             self.trans()
@@ -316,6 +333,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # отображение результата функций
     def disp(self, k):
         self.LCD.display(k)
         self.strall = str(k)[:len(str(k)) - 2] if str(k)[-1:-3:-1] == '0.' else str(k)
@@ -323,6 +341,7 @@ class MyWidget(QMainWindow):
         self.str = ''
         self.numbers[0] = k
 
+    # перевод полученной строки в число, если в списке чисел нет(То есть оно одно)
     def trans(self):
         if self.strall and not self.numbers:
             if self.sys != 16:
@@ -330,6 +349,7 @@ class MyWidget(QMainWindow):
             else:
                 self.numbers.append(self.strall)
 
+    # функция для подсчёта в десятичной системе
     def countf(self):
         if self.strall:
             if self.str:
@@ -376,6 +396,7 @@ class MyWidget(QMainWindow):
             self.primer.setText(self.strall)
             self.LCD.display(self.numbers[0])
 
+    # функция для вычисления во всех системах счисления
     def rf(self):
         try:
             if self.sys == 10:
@@ -432,6 +453,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # сделать кнопки включенными
     def able(self, b):
         self.sqrt.setEnabled(b)
         self.sqr.setEnabled(b)
@@ -439,6 +461,7 @@ class MyWidget(QMainWindow):
         self.drob.setEnabled(b)
         self.procent.setEnabled(b)
 
+    # аналогично прошлой функции, только с цифрами
     def alltrue(self):
         self.two.setEnabled(True)
         self.three.setEnabled(True)
@@ -449,6 +472,7 @@ class MyWidget(QMainWindow):
         self.eight.setEnabled(True)
         self.nine.setEnabled(True)
 
+    # перевод из десятичной в двоичную
     def transtwo(self, num):
         n = ''
         while num > 0:
@@ -460,6 +484,7 @@ class MyWidget(QMainWindow):
         self.strall = str(k)
         return k
 
+    # перевод из десятичной в восьмеричную
     def transeight(self, num):
         n = ''
         while num > 0:
@@ -471,6 +496,7 @@ class MyWidget(QMainWindow):
         self.strall = str(k)
         return k
 
+    # перевод из десятичной в шестнадцатеричную
     def transsixteen(self, num):
         n = ''
         l = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -484,6 +510,7 @@ class MyWidget(QMainWindow):
         k = '-' + n if n and self.znak else n
         return k
 
+    # переключение калькулятора в двоичную систему
     def twosf(self):
         try:
             self.trans()
@@ -518,6 +545,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # переключение калькулятора в восьмеричную систему
     def eightsf(self):
         try:
             self.trans()
@@ -547,6 +575,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # переключение калькулятора в десятичную систему
     def tensf(self):
         try:
             self.trans()
@@ -574,6 +603,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # переключение калькулятора в шестнадцатеричную систему
     def sixteensf(self):
         try:
             self.trans()
@@ -599,6 +629,7 @@ class MyWidget(QMainWindow):
             self.LCD.display('Error')
             self.primer.setText('')
 
+    # авто-отключение Alt, если пользователь этого не сделал при уходя с Hex
     def default(self):
         if self.checkalt and self.sys != 16:
             self.checkalt = False
