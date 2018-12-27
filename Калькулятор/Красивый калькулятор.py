@@ -77,14 +77,24 @@ class MyWidget(QMainWindow):
     def df(self):
         try:
             if self.strall and self.strall != '-':
-                if self.str:
-                    self.numbers.append(float(self.str))
-                    self.str = ''
-                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['/'])
-                    del self.znak[len(self.znak) - 1]
+                if self.sys != 16:
+                    if self.str:
+                        self.numbers.append(float(self.str))
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['/'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '/'
                 else:
-                    self.strall += '/'
+                    if self.str:
+                        self.numbers.append(self.str)
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['/'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '/'
                 self.znak.append('/')
                 self.primer.setText(self.strall)
         except Exception:
@@ -95,14 +105,24 @@ class MyWidget(QMainWindow):
     def raf(self):
         try:
             if self.str or self.strall:
-                if self.str:
-                    self.numbers.append(float(self.str))
-                    self.str = ''
-                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['-'])
-                    del self.znak[len(self.znak) - 1]
+                if self.sys != 16:
+                    if self.str:
+                        self.numbers.append(float(self.str))
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['-'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '-'
                 else:
-                    self.strall += '-'
+                    if self.str:
+                        self.numbers.append(self.str)
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['-'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '-'
                 self.znak.append('-')
                 self.primer.setText(self.strall)
             else:
@@ -117,14 +137,24 @@ class MyWidget(QMainWindow):
     def sf(self):
         try:
             if self.strall and self.strall != '-':
-                if self.str:
-                    self.numbers.append(float(self.str))
-                    self.str = ''
-                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['+'])
-                    del self.znak[len(self.znak) - 1]
+                if self.sys != 16:
+                    if self.str:
+                        self.numbers.append(float(self.str))
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['+'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '+'
                 else:
-                    self.strall += '+'
+                    if self.str:
+                        self.numbers.append(self.str)
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['+'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '+'
                 self.znak.append('+')
                 self.primer.setText(self.strall)
         except Exception:
@@ -135,14 +165,24 @@ class MyWidget(QMainWindow):
     def pf(self):
         try:
             if self.strall and self.strall != '-':
-                if self.str:
-                    self.numbers.append(float(self.str))
-                    self.str = ''
-                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
-                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['*'])
-                    del self.znak[len(self.znak) - 1]
+                if self.sys != 16:
+                    if self.str:
+                        self.numbers.append(float(self.str))
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['*'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '*'
                 else:
-                    self.strall += '*'
+                    if self.str:
+                        self.numbers.append(self.str)
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['*'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '*'
                 self.znak.append('*')
                 self.primer.setText(self.strall)
         except Exception:
@@ -153,14 +193,24 @@ class MyWidget(QMainWindow):
     def procentf(self):
         try:
             if self.strall and self.strall != '-':
-                if self.str:
-                    self.numbers.append(float(self.str))
-                    self.str = ''
-                if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
-                    self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
-                    del self.znak[len(self.znak) - 1]
+                if self.sys != 16:
+                    if self.str:
+                        self.numbers.append(float(self.str))
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '%'
                 else:
-                    self.strall += '%'
+                    if self.str:
+                        self.numbers.append(self.str)
+                        self.str = ''
+                    if self.strall[len(self.strall) - 1] in ['/', '-', '+', '*', '%']:
+                        self.strall = ''.join(list(self.strall)[:len(self.strall) - 1] + ['%'])
+                        del self.znak[len(self.znak) - 1]
+                    else:
+                        self.strall += '%'
                 self.znak.append('%')
                 self.primer.setText(self.strall)
         except Exception:
@@ -389,9 +439,11 @@ class MyWidget(QMainWindow):
                             del self.znak[i]
                             del self.numbers[i + 1]
                             break
-            self.numbers[0] = int(self.numbers[0]) \
-                if str(self.numbers[0])[-1:-3:-1] == '0.' \
-                else float(self.numbers[0])
+            if '.' in str(self.numbers[0]):
+                self.numbers[0] = int(str(self.numbers[0])
+                                      [:'.'.find(str(self.numbers[0])) - 1])
+            else:
+                self.numbers[0] = int(str(int(self.numbers[0])))
             self.str, self.znak, self.strall = '', [], str(self.numbers[0])
             self.primer.setText(self.strall)
             self.LCD.display(self.numbers[0])
@@ -405,7 +457,11 @@ class MyWidget(QMainWindow):
                 if self.sys == 2:
                     self.numbers.append(int(self.str))
                     for i in range(len(self.numbers)):
-                        self.numbers[i] = int(str(int(self.numbers[i])), base=2)
+                        if '.' in str(self.numbers[i]):
+                            self.numbers[i] = int(str(self.numbers[i])
+                                                  [:'.'.find(str(self.numbers[i])) - 1], base=2)
+                        else:
+                            self.numbers[i] = int(str(int(self.numbers[i])), base=2)
                     if len(self.znak) == len(self.numbers):
                         del self.znak[0]
                         self.numbers[0] *= -1
@@ -418,7 +474,11 @@ class MyWidget(QMainWindow):
                 elif self.sys == 8:
                     self.numbers.append(int(self.str))
                     for i in range(len(self.numbers)):
-                        self.numbers[i] = int(str(int(self.numbers[i])), base=8)
+                        if '.' in str(self.numbers[i]):
+                            self.numbers[i] = int(str(self.numbers[i])
+                                                  [:'.'.find(str(self.numbers[i])) - 1], base=8)
+                        else:
+                            self.numbers[i] = int(str(int(self.numbers[i])), base=8)
                     if len(self.znak) == len(self.numbers):
                         del self.znak[0]
                         self.numbers[0] *= -1
@@ -440,16 +500,20 @@ class MyWidget(QMainWindow):
                 elif self.sys == 16:
                     self.numbers.append(self.str)
                     for i in range(len(self.numbers)):
-                        self.numbers[i] = int(str(self.numbers[i]), base=16)
-                    if len(self.znak) == len(self.numbers):
-                        self.numbers[0] *= -1
+                        if '.' in str(self.numbers[i]):
+                            self.numbers[i] = int(str(self.numbers[i])
+                                                  [:'.'.find(str(self.numbers[i])) - 1], base=16)
+                        else:
+                            self.numbers[i] = int(str(self.numbers[i]), base=16)
                     self.sys = 10
                     self.countf()
                     self.sys = 16
-                    self.numbers[0] = self.transsixteen(self.numbers[0])
-                    self.primer.setText(self.strall)
+                    self.numbers = [self.transsixteen(self.numbers[0])]
+                    self.LCD.display(self.numbers[0])
+                    self.primer.setText(self.numbers[0])
                     self.numbers = [self.numbers[0]]
-        except Exception:
+        except Exception as e:
+            print(e)
             self.LCD.display('Error')
             self.primer.setText('')
 
@@ -570,8 +634,7 @@ class MyWidget(QMainWindow):
             else:
                 self.LCD.display(0)
             self.str = ''
-        except Exception as e:
-            print(e)
+        except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
@@ -598,8 +661,7 @@ class MyWidget(QMainWindow):
             else:
                 self.LCD.display(0)
             self.str = ''
-        except Exception as e:
-            print(e)
+        except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
@@ -624,8 +686,7 @@ class MyWidget(QMainWindow):
             if self.numbers:
                 self.str, self.strall = str(self.numbers[0]), str(self.numbers[0])
                 del self.numbers[0]
-        except Exception as e:
-            print(e)
+        except Exception:
             self.LCD.display('Error')
             self.primer.setText('')
 
